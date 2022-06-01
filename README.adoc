@@ -1,0 +1,32 @@
+= AWS Quarkus ToDo - infrastructure as code
+
+== Inspiration / Rip-off
+
+Inspiration / Rip-off for this project is found in the project "Quarkus JAX-RS App Deployed with AWS CDK as AWS Lambda behind HTTP API, REST API, Application Load Balancer and as Function URL" -> https://github.com/AdamBien/aws-quarkus-lambda-cdk-plain[aws-quarkus-lambda-cdk-plain] by Adam Bien.
+
+== Commands
+
+.Build
+[source,bash]
+----
+./buildAndDeploy.sh --profile <profile>
+----
+
+.Build and don't ask
+[source,bash]
+----
+./buildAndDeployDontAsk.sh --profile <profile>
+----
+
+.Destroy
+[source,bash]
+----
+./destroy.sh --profile <profile>
+----
+
+== Links
+
+- https://docs.aws.amazon.com/cdk/api/v2/java/overview-summary.html[AWS CDK]
+- https://quarkiverse.github.io/quarkiverse-docs/quarkus-amazon-services/dev/amazon-dynamodb.html[Quarkus DynamoDB]
+- https://docs.aws.amazon.com/cdk/api/v2/java/software/amazon/awscdk/services/dynamodb/Table.html https://docs.aws.amazon.com/cdk/api/v2/java/software/amazon/awscdk/services/dynamodb/CfnTable.html[DynamoDB javadoc]
+- https://github.com/jarryDk/aws-todo-app/tree/main/todo-app[aws-todo-app]
