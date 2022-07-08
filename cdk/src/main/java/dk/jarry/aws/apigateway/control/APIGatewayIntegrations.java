@@ -1,4 +1,4 @@
-package dk.jarry.apigateway.control;
+package dk.jarry.aws.apigateway.control;
 
 import software.amazon.awscdk.CfnOutput;
 import software.amazon.awscdk.services.apigateway.LambdaRestApi;
@@ -19,27 +19,43 @@ public class APIGatewayIntegrations extends Construct {
 		}
 
 		CfnOutput.Builder.create(this, "FunctionHttpApiIntegration") //
-				.value(String.valueOf(httpAPIGatewayIntegration)).build();
+				.value(String.valueOf(httpAPIGatewayIntegration)) //
+				.build();
 		CfnOutput.Builder.create(this, "FunctionArnOutput") //
-				.value(function.getFunctionArn()).build();
+				.value(function.getFunctionArn()) //
+				.build();
 	}
 
 	/**
 	 * https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-rest-api.html
 	 */
 	void integrateWithRestApiGateway(IFunction function) {
-		var apiGateway = LambdaRestApi.Builder.create(this, "RestApiGateway").handler(function).build();
-		CfnOutput.Builder.create(this, "RestApiGatewayUrlOutput").value(apiGateway.getUrl()).build();
-
+		var apiGateway = LambdaRestApi.Builder //
+				.create(this, "RestApiGateway") //
+				.handler(function) //
+				.build();
+		var url = apiGateway.getUrl();
+		CfnOutput.Builder //
+				.create(this, "RestApiGatewayUrlOutput") //
+				.value(apiGateway.getUrl()) //
+				.build();
+		CfnOutput.Builder //
+				.create(this, "RestApiGatewayCurlOutput") //
+				.value("curl -i " + url + "hello") //
+				.build();
 	}
 
 	/**
 	 * https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html
 	 */
 	void integrateWithHTTPApiGateway(IFunction function) {
-		var lambdaIntegration = HttpLambdaIntegration.Builder.create("HttpApiGatewayIntegration", function).build();
-		var httpApiGateway = HttpApi.Builder.create(this, "HttpApiGatewayIntegration")
-				.defaultIntegration(lambdaIntegration).build();
+		var lambdaIntegration = HttpLambdaIntegration.Builder //
+				.create("HttpApiGatewayIntegration", function) //
+				.build();
+		var httpApiGateway = HttpApi.Builder //
+				.create(this, "HttpApiGatewayIntegration") //
+				.defaultIntegration(lambdaIntegration) //
+				.build();
 		var url = httpApiGateway.getUrl();
 		CfnOutput.Builder.create(this, "HttpApiGatewayUrlOutput").value(url).build();
 		CfnOutput.Builder.create(this, "HttpApiGatewayCurlOutput").value("curl -i " + url + "hello").build();

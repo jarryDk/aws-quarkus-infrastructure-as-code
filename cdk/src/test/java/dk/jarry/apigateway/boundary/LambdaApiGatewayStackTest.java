@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import dk.jarry.CDKApp;
+import dk.jarry.aws.CDKApp;
+import dk.jarry.aws.apigateway.boundary.LambdaApiGatewayStack;
 import software.amazon.awscdk.App;
 
 public class LambdaApiGatewayStackTest {

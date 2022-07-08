@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 if [ -z "$1" ] || [ -z "$2" ]; then
@@ -8,4 +8,4 @@ else
     PROFILE="--profile $2"
 fi
 
-cdk destroy $PROFILE
+cdk destroy $PROFILE --all
